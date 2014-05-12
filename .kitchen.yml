@@ -1,0 +1,20 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+  solo_rb:
+    ssl_verify_mode: verify_peer
+
+platforms:
+  - name: ubuntu-12.04
+  - name: ubuntu-14.04
+
+suites:
+  - name: application-server
+    run_list:
+      - role[docker-registry_application_server]
+    attributes:
+      docker-registry:
+        secret_key: CHANGEME
