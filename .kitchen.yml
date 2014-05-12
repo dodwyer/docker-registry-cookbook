@@ -14,7 +14,7 @@ platforms:
 suites:
   - name: application-server
     run_list:
-      - role[docker-registry_application_server]
+      - recipe[docker-registry::application_server]
     attributes:
       docker-registry:
         secret_key: CHANGEME
