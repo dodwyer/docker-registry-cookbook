@@ -30,12 +30,10 @@ Vagrant.configure("2") do |config|
   EOF
   config.vm.provision :chef_solo do |chef|
     chef.log_level = ENV['DEBUG'] ? :debug : :info
-	
-    chef.roles_path = "roles"
-    chef.add_role("docker-registry_application_server")
-    chef.add_role("docker-registry_load_balancer")
-    chef.add_role("docker-registry")
-	
+
+    chef.add_recipe("docker-registry::application_server")
+    chef.add_recipe("docker-registry::load_balancer")
+
     chef.json = {
       'docker-registry' => {
         'owner' => 'dockreg',
@@ -43,8 +41,5 @@ Vagrant.configure("2") do |config|
         'secret_key' => 'fksldjriohl2kfsn2lh342kjfdeaslhkhfskjnhalknfk4232snfkldjfsdf3242'
       }
     }
-    chef.run_list = [
-      "role[docker-registry_application_server]"
-    ]
   end
 end
