@@ -18,6 +18,9 @@
 # limitations under the License.
 #
 
+# https://github.com/ismell/docker-registry-cookbook/issues/9
+package "libssl-dev"
+
 group node['docker-registry']['group'] do
   only_if { node['docker-registry']['create_user_and_group'] }
 
